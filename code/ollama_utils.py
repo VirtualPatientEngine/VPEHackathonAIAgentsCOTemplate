@@ -16,7 +16,7 @@ def restart_ollama_server() -> None:
 
 
 # -------
-def ollama_response(message: str, model="llama3.1", role="user", temperature=0.0):
+def ollama_response(message: str, model="llama3.1", role="user", temperature=0.0) -> str:
     response = ollama.chat(
         model="llama3.1",
         options={"temperature": temperature},
