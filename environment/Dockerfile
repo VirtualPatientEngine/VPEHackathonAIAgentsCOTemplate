@@ -1,4 +1,4 @@
-# hash:sha256:34f6d3970b97c00cf7b6f68a1c8cf9298cf163ecf337d04b44a182ec55a8ff77
+# hash:sha256:fd9f32cbbefd2565be1d5914cad20de3ae6b5c06f5b3a9a7af1850b6c4179aba
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/ubuntu-desktop-pytorch:2.1.0-cuda11.8-mambaforge23.1.0-4-python3.10.12-fiji20231107-1617-firefox120.0-igv2.16.1-guacamole1.5.2-ubuntu22.04
 
@@ -7,11 +7,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG GIT_ASKPASS
 ARG GIT_ACCESS_TOKEN
 COPY git-askpass /
-
-RUN mamba install -y \
-        cuda-toolkit==11.8.0 \
-        cudnn==8.0.4 \
-    && mamba clean -ya
 
 RUN pip install -U --no-cache-dir \
     cellxgene-census==1.16.1 \
