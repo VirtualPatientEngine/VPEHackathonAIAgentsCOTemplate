@@ -1,4 +1,4 @@
-# hash:sha256:8e7539aa44a4e44b722f3730cf71f4a3baa9ff7075f0099ceeec83af045cf2a6
+# hash:sha256:34f6d3970b97c00cf7b6f68a1c8cf9298cf163ecf337d04b44a182ec55a8ff77
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/ubuntu-desktop-pytorch:2.1.0-cuda11.8-mambaforge23.1.0-4-python3.10.12-fiji20231107-1617-firefox120.0-igv2.16.1-guacamole1.5.2-ubuntu22.04
 
@@ -23,3 +23,6 @@ RUN pip install -U --no-cache-dir \
     requests==2.32.3 \
     tabulate==0.9.0 \
     tqdm==4.66.5
+
+COPY postInstall /
+RUN /postInstall

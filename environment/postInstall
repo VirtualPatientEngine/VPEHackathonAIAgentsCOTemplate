@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# set -e
+# curl -fsSL https://ollama.com/install.sh | sh
+
+set -eu
+
+status() { echo ">>> $*" >&2; }
+error() { echo "ERROR $*"; exit 1; }
+
+TEMP_DIR=$(mktemp -d)
+cleanup() { rm -rf $TEMP_DIR; }
+trap cleanup EXIT
+
+available() { command -v $1 >/dev/null; }
+require() {
+    local MISSING=''
+    for TOOL in $*; do
+        if ! available $TOOL; then
+            MISSING="$MISSING $TOOL"
+        fi
+    done
+
+    echo $MISSING
+}
+
+[ "$(uname -s)" = "Linux" ] || error 'This script is intended to run on Linux only.'
+
+ARCH=$(uname -m)
+case "$ARCH" in
+    x86_64) ARCH="amd64" ;;
+    aarch64|arm64) ARCH="arm64" ;;
+    *) error "Unsupported architecture: $ARCH" ;;
+esac
+
+
+VER_PARAM="${OLLAMA_VERSION:+?version=$OLLAMA_VERSION}"
+
+SUDO=
+if [ "$(id -u)" -ne 0 ]; then
+    # Running as root, no need for sudo
+    if ! available sudo; then
+        error "This script requires superuser permissions. Please re-run as root."
+    fi
+
+    SUDO="sudo"
+fi
+
+NEEDS=$(require curl awk grep sed tee xargs)
+if [ -n "$NEEDS" ]; then
+    status "ERROR: The following tools are required but missing:"
+    for NEED in $NEEDS; do
+        echo "  - $NEED"
+    done
+    exit 1
+fi
+
+for BINDIR in /usr/local/bin /usr/bin /bin; do
+    echo $PATH | grep -q $BINDIR && break || continue
+done
+OLLAMA_INSTALL_DIR=$(dirname ${BINDIR})
+
+status "Installing ollama to $OLLAMA_INSTALL_DIR"
+$SUDO install -o0 -g0 -m755 -d $BINDIR
+$SUDO install -o0 -g0 -m755 -d "$OLLAMA_INSTALL_DIR"
+if curl -I --silent --fail --location "https://ollama.com/download/ollama-linux-${ARCH}.tgz${VER_PARAM}" >/dev/null ; then
+    status "Downloading Linux ${ARCH} bundle"
+    curl --fail --show-error --location --progress-bar \
+        "https://ollama.com/download/ollama-linux-${ARCH}.tgz${VER_PARAM}" | \
+        $SUDO tar -xzf - -C "$OLLAMA_INSTALL_DIR"
+    BUNDLE=1
+    if [ "$OLLAMA_INSTALL_DIR/bin/ollama" != "$BINDIR/ollama" ] ; then
+        status "Making ollama accessible in the PATH in $BINDIR"
+        $SUDO ln -sf "$OLLAMA_INSTALL_DIR/ollama" "$BINDIR/ollama"
+    fi
+else
+    status "Downloading Linux ${ARCH} CLI"
+    curl --fail --show-error --location --progress-bar -o "$TEMP_DIR/ollama"\
+    "https://ollama.com/download/ollama-linux-${ARCH}${VER_PARAM}"
+    $SUDO install -o0 -g0 -m755 $TEMP_DIR/ollama $OLLAMA_INSTALL_DIR/ollama
+    BUNDLE=0
+    if [ "$OLLAMA_INSTALL_DIR/ollama" != "$BINDIR/ollama" ] ; then
+        status "Making ollama accessible in the PATH in $BINDIR"
+        $SUDO ln -sf "$OLLAMA_INSTALL_DIR/ollama" "$BINDIR/ollama"
+    fi
+fi
+
+
+
+SOURCE_DIR="/data/.ollama"
+TARGET_DIR="/root/.ollama"
+
+# Create the source directory if it doesn't exist
+mkdir -p "$SOURCE_DIR"
+
+# Remove existing target directory if it's not a symlink
+if [ -e "$TARGET_DIR" ] && [ ! -L "$TARGET_DIR" ]; then
+    rm -rf "$TARGET_DIR"
+fi
+
+# Create the symbolic link
+ln -s "$SOURCE_DIR" "$TARGET_DIR"
+echo "Symlink created from $TARGET_DIR to $SOURCE_DIR"
+
