@@ -1,3 +1,24 @@
+"""
+**AD_QSP_tools.py**
+
+This module implements a mathematical model for simulating drug effects on eczema severity using the Atopic Dermatitis Quantitative Systems Pharmacology (AD-QSP) model, based on the work of Miyano et al. 
+Its primary purpose is to provide a computational tool that predicts how different drugs influence the progression of atopic dermatitis by affecting various biological factors. 
+The model quantifies eczema severity using the Eczema Area and Severity Index (EASI) score, enabling researchers and clinicians to assess potential drug efficacy in a controlled, simulated environment.
+
+The implementation centers around a system of ordinary differential equations (ODEs) that represent the complex interactions between key biological components involved in eczema, 
+such as skin barrier integrity, infiltrated pathogens, immune cells (Th1, Th2, Th17, Th22), and cytokines (e.g., IL-4, IL-13, IL-17). 
+The `diff_eq` function defines these equations, incorporating drug effects by adjusting the concentrations of specific factors based on user-defined inputs. 
+An `ODE` class is provided to numerically solve these equations over time using SciPy's `odeint` function, allowing for dynamic simulations of disease progression under various drug influences.
+
+To use the module, users define drug effects through a dictionary where keys are biological factors and values 
+represent the fractional change induced by the drug (e.g., `{"IL-4": -0.5}` for a 50% reduction in IL-4 levels). 
+The `test_drug_efficacy` function simulates these effects across a cohort of virtual patients (defaulting to 1,000), 
+each characterized by parameter sets sampled from statistical distributions to reflect biological variability. 
+This function returns the mean and standard deviation of EASI scores over the simulation period, facilitating the evaluation of average drug efficacy and response variability within the population. 
+Additionally, the `get_easi_severity` function interprets EASI scores to classify eczema severity levels, providing a qualitative assessment alongside quantitative results.
+"""
+
+
 import numpy as np
 import pandas as pd
 from scipy.integrate import odeint
