@@ -1,4 +1,4 @@
-# hash:sha256:2f05ab449c1ba3d9ee9762a89440bd3caa86394e453b33186d365eef0572647c
+# hash:sha256:60d0817d11204e6fe0b6f7852da218545f446c84f194835d6a70156b13664df8
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/ubuntu-desktop-pytorch:2.1.0-cuda11.8-mambaforge23.1.0-4-python3.10.12-fiji20231107-1617-firefox120.0-igv2.16.1-guacamole1.5.2-ubuntu22.04
 
@@ -16,11 +16,9 @@ RUN pip install -U --no-cache-dir \
     pandas==2.2.3 \
     pyarrow==17.0.0 \
     requests==2.32.3 \
+    streamlit==1.39.0 \
     tabulate==0.9.0 \
     tqdm==4.66.5
-
-RUN pip3 install -U --no-cache-dir \
-    streamlit==1.38.0
 
 COPY postInstall /
 RUN /postInstall

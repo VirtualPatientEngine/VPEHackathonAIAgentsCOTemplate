@@ -1,2 +1,17 @@
 metadata_version: 1
 name: ollama-RAG-example
+description: 'This project integrates language models with retrieval-augmented generation
+  (RAG) and systems biology modeling to analyze single-cell RNA-seq data and simulate
+  drug effects on eczema. It leverages the Ollama language model server for natural
+  language processing and embedding generation, and combines two main components:
+  a RAG model for querying gene expression data and a SysBio model for simulating
+  drug effects using an Atopic Dermatitis Quantitative Systems Pharmacology (AD-QSP)
+  model. The system is implemented as a user-friendly Streamlit application, allowing
+  researchers and medical professionals to explore complex biological datasets, test
+  drug efficacy hypotheses, and receive AI-generated insights on biomedical questions.'
+tags:
+- ollama
+- RAG
+- QSP
+authors:
+- name: dror.hilman@codeocean.com

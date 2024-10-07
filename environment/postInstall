@@ -84,7 +84,7 @@ else
     fi
 fi
 
-
+pip install transformers
 
 SOURCE_DIR="/data/.ollama"
 TARGET_DIR="/root/.ollama"
