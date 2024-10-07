@@ -5,6 +5,7 @@ from ollama_utils import ollama_stream, ollama_response
 from query_utils import from_collection_datasets_to_markdown, extract_dictionary_from_response
 from gene_expression_datasets_rag import load_rag_system, search_by_question
 from AD_QSP_tools import test_drug_efficacy, get_easi_severity, question_examples
+from cell2Sentence import question_to_cell_type
 
 st.set_page_config(page_title="LLM-RAG-for-biology-examples", page_icon="🌟", layout="wide")
 load_rag_system()
@@ -20,7 +21,9 @@ selected_model = st.selectbox("Select a model:", models, index=models.index(defa
 
 
 # Create tabs - one for each model: RAG and sysBio
-rag_tab, ecsema_tab = st.tabs(["Ask about Single-Cell RNA-seq data", "Talk with SysBio Model"])
+rag_tab, ecsema_tab, cell2sentence_tab = st.tabs(
+    ["Ask about Single-Cell RNA-seq data", "Talk with SysBio Model", "Ask about cells"]
+)
 
 # --------------------------------------------------------
 # --- Section: RAG Model ---
@@ -82,7 +85,7 @@ I'll simulate the effects of a drug on these parameters, starting from `0` (no e
     # If the user selects a question from the selectbox, override the text input with the selected question
     if question_selected != "":
         question = question_selected
-    
+
     if st.button("Ask me a question!"):
         with st.spinner("⚙️ Extracting parameters..."):
             placeholder = st.empty()
@@ -146,13 +149,28 @@ response:
             result = ollama_response(prompt, selected_model)
             params = extract_dictionary_from_response(result)
 
-        with st.spinner("🚀 Running simulation..."): # a good 5 different emojis for running simulation: 🏃‍♂️, 
+        with st.spinner("🚀 Running simulation..."):  # a good 5 different emojis for running simulation: 🏃‍♂️,
             sim_result = test_drug_efficacy(params)
             mean_easi = sim_result["mean_easi"][-1]
             std_easi = sim_result["std_easi"][-1]
             severity = get_easi_severity(mean_easi)
-            full_response += f"### Drug effects:  EASI (24 weeks) : {mean_easi:.2f} ± {std_easi:.2f} (mean ± std)  \n        "
+            full_response += (
+                f"### Drug effects:  EASI (24 weeks) : {mean_easi:.2f} ± {std_easi:.2f} (mean ± std)  \n        "
+            )
             full_response += f"\nExpected Severity:  **{severity}**  \n      "
             full_response += "The Mean EASI is the average score that shows how severe eczema symptoms are for a group of people, with higher numbers indicating worse symptoms and lower numbers showing improvement. \n      "
-            
+
+            st.write(full_response)
+
+# --------------------------------------------------------
+# --- Section: Cell2Sentence Model ---
+with cell2sentence_tab:
+    st.write(
+        'This code allows users to input questions like "What cell types are associated with genes MT-CO3 and MT-ATP6?" and automatically generates a clear, professional response identifying the relevant cell types or expected genes based on the provided information.'
+    )
+    question = st.text_input("Ask me a question about cells or a list of genes:")
+    if st.button("Ask about cells"):
+        with st.spinner("🔍 Analyzing the question..."):
+            placeholder = st.empty()
+            full_response = question_to_cell_type(question)
             st.write(full_response)

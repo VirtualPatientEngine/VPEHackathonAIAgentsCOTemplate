@@ -1,5 +1,5 @@
 # code/initialize_rag.py
-# helper function for the streamlit_app that demonstrates how to use stramlit sesiosn state to store the dataset and embedding database
+# helper function for the streamlit_app that demonstrates how to use streamlit sessions state to store the dataset and embedding database
 
 import streamlit as st
 from pathlib import Path
@@ -10,7 +10,7 @@ from embedding_utils import get_embedding
 
 
 # --- Section: Load the dataset and embedding database ---
-data_dir = "/data" if Path("/data/collections").exists() else Path(__file__).parent.parent / "data"
+data_dir = "/data/collections" if Path("/data/collections").exists() else Path(__file__).parent.parent / "data"
 scratch_dir = "/scratch" if Path("/scratch").exists() else Path(__file__).parent.parent / "scratch"
 MAX_DATASETS = 2
 
@@ -20,7 +20,7 @@ def load_rag_system():
         restart_ollama_server()
         st.session_state.ollama_started = True
     if "dataset" not in st.session_state:
-        st.session_state.dataset = pd.read_parquet(f"{data_dir}/collections/cellxgene_collections_metadata.parquet")
+        st.session_state.dataset = pd.read_parquet(f"{data_dir}/cellxgene_collections_metadata.parquet")
         print("Dataset loaded.")
     if "collection" not in st.session_state:
         st.session_state.client = chromadb.PersistentClient(path=f"{scratch_dir}/cellxgene_collections_chromadb")
