@@ -1,4 +1,4 @@
-# hash:sha256:5d57d97bc8b457cb1d9ec1a01bd8450bbbaee54e84cb166591966ad9a75146d2
+# hash:sha256:86d29c23ab11586c83be927028b055aa41aae279edd34e2d426c576faed6aef1
 ARG REGISTRY_HOST
 FROM $REGISTRY_HOST/codeocean/ubuntu-desktop-pytorch:2.1.0-cuda11.8-mambaforge23.1.0-4-python3.10.12-fiji20231107-1617-firefox120.0-igv2.16.1-guacamole1.5.2-ubuntu22.04
 
@@ -12,10 +12,14 @@ RUN pip install -U --no-cache-dir \
     cellxgene-census==1.16.1 \
     chromadb==0.5.7 \
     copasi-basico==0.75 \
+    faiss-cpu==1.9.0 \
+    json-repair \
     langchain==0.3.0 \
     langchain-community==0.3.0 \
+    langchain-experimental \
     langchain-ollama==0.2.0 \
     langchain-openai==0.2.2 \
+    networkx \
     ollama==0.3.3 \
     pandas==2.2.3 \
     pyarrow==17.0.0 \

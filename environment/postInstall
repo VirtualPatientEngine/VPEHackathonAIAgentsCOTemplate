@@ -85,6 +85,7 @@ else
 fi
 
 pip install transformers
+pip install torch-scatter torch-sparse torch-geometric -f https://data.pyg.org/whl/torch-2.1.0+cu118.html
 
 SOURCE_DIR="/data/.ollama"
 TARGET_DIR="/root/.ollama"
