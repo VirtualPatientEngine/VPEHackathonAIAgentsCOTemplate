@@ -2,15 +2,5 @@
 set -ex
 
 # This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
-python -u langchain_ollama_example.py "$@"
+python -u ollama_faiss_example.py "$@"
 
-# The previous version of this file was commented-out and follows below:
-#
-# python -u basico_example.py "$@"
-# 
-# # The previous version of this file was commented-out and follows below:
-# #
-# # python -u embedding_utils.py "$@"
-# # 
-# # 
-# 
