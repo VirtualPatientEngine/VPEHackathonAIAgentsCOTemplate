@@ -14,6 +14,50 @@ The system consists of three main components:
 
 All components are integrated into a user-friendly **Streamlit** application, making it easy to interact with complex biological data and models.
 
+---
+## Getting started - cloning the Repo into a new capsule
+
+### stage I: clone the repo:
+get your group GitHub repository address **<github_address>** (ex. https://github.com/OceanCodes/VPEHackathonAIAgentsCOTemplate.git)
+
+1. Click on the **New Capsule** button on the top right corner.
+2. Select: "**Copy from public Git**".
+3. Paste the git repository address: **<github_address>**
+4. Click **import**
+5. The capsule will be cloned within a few seconds.
+
+### stage II:Attach the data-assets:
+
+6. In the capsule view, in the `data` folder in the files tree click **⚙️manage**
+7. Attach the data-assets by clicking the plus sign (⊕):   
+
+   a. ⊕ `collections: cellxgene census metadata 2024-04-24`.  
+   b. ⊕ `ollama_models_09_2024`
+
+Now, all the code in the capsule should be ready to run.
+
+
+### Ollama important note:
+The current setup maps the default Ollama models to `/data/`, making it easy to attach Ollama models as data assets. However, since data assets are immutable and cannot be changed, you’ll need to map the `./ollama` directory to `/scratch/.ollama` if you want to download or modify different models, as `/scratch/` is writable.
+
+```bash
+# Create the source directory if it doesn't exist
+mkdir -p /scratch/.ollama
+
+# delete the existing symbolic link link
+rm /root/.ollama
+
+# Create the new symbolic link (each write to /root/.ollama will be directed to /scratch/.ollama)
+ln -s  /scratch/.ollama /root/.ollama
+
+# copy the key:
+cp /data/.ollama/id_ed25519 /scratch/.ollama/id_ed25519
+
+```
+... Now you can easily pull any ollama model with `ollama pull <model>`
+---
+
+
 ## Key Components and Files
 
 ### 1. Streamlit Application (`streamlit_app.py`)
