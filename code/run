@@ -2,4 +2,4 @@
 set -ex
 
 # This is the master script for the capsule. When you click "Reproducible Run", the code in this file will execute.
-python -u langchain_torch_geometric_example.py "$@"
+python -u embedding_utils.py "$@"
