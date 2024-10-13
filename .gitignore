@@ -1,3 +1,7 @@
 /data/
 
 .vscode
+code/__pycache__/
+environment/Dockerfile
+*.pyc
+code/__pycache__/*.pyc

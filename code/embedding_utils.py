@@ -94,14 +94,21 @@ def process_documents(client, docs, collection_name):
         add_document(collection, doc, i)
 
 
+def initialize_rag_database():
+    collections = pd.read_parquet("/data/collections/cellxgene_collections_metadata.parquet")
+    docs = collections.description.tolist()
+    client = chromadb.PersistentClient(path="/scratch/cellxgene_collections_chromadb")
+    process_documents(client, docs, collection_name="descriptions")
+    return client
+
+
+
 if __name__ == "__main__":
     restart_ollama_server()
     # --------------------
     # how to create a collection and embeddign database ...
     collections = pd.read_parquet("/data/collections/cellxgene_collections_metadata.parquet")
-    docs = collections.description.tolist()
-    client = chromadb.PersistentClient(path="/scratch/cellxgene_collections_chromadb")
-    process_documents(client, docs, collection_name="descriptions")
+    client = initialize_rag_database()
 
     # --------------------
     # How to use this collection:

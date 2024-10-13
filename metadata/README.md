@@ -305,6 +305,65 @@ The **Ollama** language model server is a central component of this project, use
 
 ---
 
-## Conclusion
+## Expanded Use Cases: Machine Learning and Systems Biology
 
-This project showcases the integration of language models with data retrieval, systems biology simulations, and gene-cell type interpretation, emphasizing the powerful capabilities of the **Ollama** language model server. Whether you're exploring gene expression datasets, assessing potential drug effects on eczema, or interpreting complex gene-cell type relationships, this tool provides a user-friendly interface backed by robust computational models.
+The project has now been extended with several powerful machine learning, vector search, and systems biology tools. These new features enable the project to support a wider range of tasks such as semantic search, dynamic simulations of biological models, and the construction of knowledge graphs. Below are the details for each new example, organized by file name:
+
+### File: `ollama_faiss_example.py`
+
+- **Purpose**: This example demonstrates how to create a **semantic search system** using FAISS and the `nomic-embed-text` model from Ollama.
+- **Key Features**: 
+  - Document embeddings are created using `OllamaEmbeddings` and stored in a FAISS index for fast similarity-based retrieval.
+  - The FAISS index is used to retrieve the most similar document based on a query.
+- **Use Case**: Ideal for situations where fast and scalable document retrieval is needed, such as finding relevant papers or documents in large datasets.
+- **How to Use**: Use the embeddings generated from textual data to create an index for querying. The code is designed to store and retrieve documents based on semantic similarity.
+
+### File: `basico_example.py`
+
+- **Purpose**: This script replicates the **Teusink2000 glycolysis model** using the `basico` library to simulate steady-state fluxes and metabolite concentrations.
+- **Key Features**: 
+  - The model replicates the results from Teusink et al. (2000) with slight adjustments for ATP species and kinetic equations.
+  - Time-course simulations allow users to explore dynamic changes in glycolysis over time.
+- **Use Case**: Useful for systems biology researchers interested in enzyme kinetics and metabolic pathways.
+- **How to Use**: Load the Teusink2000 glycolysis model, run a simulation, and analyze the results, such as metabolite concentrations over time.
+
+### File: `langchain_ollama_example.py`
+
+- **Purpose**: Demonstrates **caching with LangChain** to optimize repeated queries using the `OllamaLLM` model.
+- **Key Features**: 
+  - Integrates an SQLite cache to store responses, improving performance on repeated or similar queries.
+  - Uses a prompt template to interact with the Ollama model for natural language processing tasks.
+- **Use Case**: This setup is perfect for applications where repeated queries are common, reducing inference time and improving overall system efficiency.
+- **How to Use**: Implement the SQLite cache and set up the `OllamaLLM` model to optimize repeated requests and enhance response times.
+
+### File: `langchain_torch_geometric_example.py`
+
+- **Purpose**: Converts unstructured text into a **knowledge graph** using `LLMGraphTransformer` and the Ollama LLM.
+- **Key Features**: 
+  - Extracts entities and relationships from text and constructs a graph representation using NetworkX.
+  - The graph can be saved for visualization or further analysis.
+- **Use Case**: This example is useful for building knowledge graphs from textual data, such as scientific literature or historical records.
+- **How to Use**: Use the `LLMGraphTransformer` to extract entities and relationships, then construct and visualize the graph with NetworkX.
+
+### File: `example_torch_geometric.py`
+
+- **Purpose**: This example demonstrates using **Graph Neural Networks (GNNs)** for **regression tasks in drug discovery**, using the PyTorch Geometric library.
+- **Key Features**: 
+  - A GCN model is trained on the MoleculeNet “lipo” dataset to predict molecular properties.
+  - The script includes functions for dataset loading, model training, and evaluation.
+- **Use Case**: This is ideal for tasks in cheminformatics or drug discovery where molecular properties need to be predicted based on graph structures.
+- **How to Use**: Load the MoleculeNet dataset, train a GCN model, and evaluate its performance on regression tasks such as predicting molecular binding affinity.
+
+### Purpose of the New Systems
+
+The newly added examples significantly expand the scope of this project by incorporating advanced machine learning, systems biology, and knowledge graph construction capabilities. These additions allow the project to:
+
+1. **Enable Scalable Semantic Search**: By using FAISS and `OllamaEmbeddings`, users can create efficient document retrieval systems.
+  
+2. **Simulate Complex Biological Systems**: The inclusion of the Teusink2000 glycolysis model enables dynamic simulations of biochemical pathways, providing insights into metabolic fluxes and enzyme kinetics.
+
+3. **Build Knowledge Graphs from Text**: Using `LLMGraphTransformer`, unstructured text can be transformed into structured knowledge graphs, useful for relationship extraction and data visualization.
+
+4. **Apply Machine Learning in Drug Discovery**: The GCN model example shows how to apply graph neural networks for molecular property prediction, crucial for drug discovery and cheminformatics research.
+
+By integrating these machine learning, simulation, and NLP tools, the project now provides a comprehensive platform for cutting-edge research across multiple domains. Users can seamlessly switch between NLP tasks, machine learning model training, and biological simulations, all within a unified environment.

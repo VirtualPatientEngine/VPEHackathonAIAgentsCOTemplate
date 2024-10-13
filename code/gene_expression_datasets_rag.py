@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 import chromadb
 from ollama_utils import restart_ollama_server
-from embedding_utils import get_embedding
+from embedding_utils import get_embedding, initialize_rag_database
 
 
 # --- Section: Load the dataset and embedding database ---
@@ -23,6 +23,8 @@ def load_rag_system():
         st.session_state.dataset = pd.read_parquet(f"{data_dir}/cellxgene_collections_metadata.parquet")
         print("Dataset loaded.")
     if "collection" not in st.session_state:
+        if not Path("/scratch/cellxgene_collections_chromadb").exists():
+            initialize_rag_database()
         st.session_state.client = chromadb.PersistentClient(path=f"{scratch_dir}/cellxgene_collections_chromadb")
         st.session_state.collection = st.session_state.client.get_collection(name="descriptions")
         print("Embedding database loaded.")
