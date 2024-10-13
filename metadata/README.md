@@ -15,21 +15,27 @@ The system consists of three main components:
 All components are integrated into a user-friendly **Streamlit** application, making it easy to interact with complex biological data and models.
 
 ---
-## Getting started - cloning the Repo into a new capsule
+## Getting started - Cloning the GitHub Repo into a new capsule
 
-### stage I: clone the repo:
-get your group GitHub repository address **<github_address>** (ex. https://github.com/OceanCodes/VPEHackathonAIAgentsCOTemplate.git)
+### stage I: Clone the repo:
+get your group GitHub repository address **<github_address>** (ex. https://github.com/VirtualPatientEngine/VPEHackathonAIAgentsCOTemplate)
 
 1. Click on the **New Capsule** button on the top right corner.
-2. Select: "**Copy from public Git**".
+2. Select: "**Copy from virtualPatientAgent**".
 3. Paste the git repository address: **<github_address>**
-4. Click **import**
+4. Click **clone**
 5. The capsule will be cloned within a few seconds.
 
-### stage II:Attach the data-assets:
+### stage II: Create and add your personal access tokens
 
-6. In the capsule view, in the `data` folder in the files tree click **⚙️manage**
-7. Attach the data-assets by clicking the plus sign (⊕):   
+6. Follow GitHub instructions to generate `personal access token`: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+7. Then on Code Ocean, click on the 'account' icon on the bottom left side, and go to `credentials`.
+8. Click on `⊕ Add credential` and choose `GitHub`, then add your username (in GitHub) and the token you have created.    
+
+### stage III: Attach the data-assets:
+
+9. In the capsule view, in the `data` folder in the files tree click **⚙️manage**
+10. Attach the data-assets by clicking the plus sign (⊕):   
 
    a. ⊕ `collections: cellxgene census metadata 2024-04-24`.  
    b. ⊕ `ollama_models_09_2024`
