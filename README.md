@@ -2,12 +2,10 @@
 # BioModel Simulation and Analysis Web App
 
 This Streamlit-based web application allows users to run and analyze biological simulations, particularly focused on glycolysis models. The app provides an interactive interface to select models, input simulation parameters, generate results, and visualize the output. It also integrates a language model for querying and explaining the simulation outcomes.
----
 
---- 
 ## Flow Diagram
 
-mermaid
+```mermaid
 sequenceDiagram
     actor User
     participant StreamlitApp
@@ -16,7 +14,7 @@ sequenceDiagram
     participant ResultProcessor
     participant LLM
     participant CacheManager
-
+    
     User ->> StreamlitApp: Provide Model ID and Parameters
     StreamlitApp ->> ModelSelector: Select Biological Model
     ModelSelector -->> StreamlitApp: Model Selected
@@ -31,7 +29,8 @@ sequenceDiagram
     User ->> StreamlitApp: Clear Results
     StreamlitApp ->> CacheManager: Clear Cached Data
     CacheManager -->> StreamlitApp: Cache Cleared
----
+
+``` 
 
 ---
 
