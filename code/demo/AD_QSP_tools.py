@@ -43,7 +43,7 @@ default_drug_effects = {
 }
 
 
-def load_parameters(mu_file="/code/AD_QSP_model/mu.csv", sigma_file="/code/AD_QSP_model/sigma.csv") -> tuple:
+def load_parameters(mu_file="/demo/code/AD_QSP_model/mu.csv", sigma_file="/demo/code/AD_QSP_model/sigma.csv") -> tuple:
     """Load the mu and sigma parameters from CSV files."""
     mu = pd.read_csv(mu_file, header=None).to_numpy().flatten().reshape(-1, 1)
     sigma = pd.read_csv(sigma_file, header=None).to_numpy().flatten().reshape(-1, 1)
