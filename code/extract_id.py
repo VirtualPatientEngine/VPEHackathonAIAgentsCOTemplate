@@ -5,7 +5,7 @@ from langchain.chains import LLMChain
 import os
 import glob
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "XXX"
 
 def get_model_id(text = "Hi,  Make  simulation of ID with 64 ."):
     """

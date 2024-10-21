@@ -94,7 +94,7 @@ except:
     pass
 
 import os
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "XXX"
 
 from langchain_experimental.agents import create_csv_agent
 from langchain_openai import OpenAI
