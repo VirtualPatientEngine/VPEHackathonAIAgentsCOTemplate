@@ -1,7 +1,7 @@
-# Hackathon
 # BioModel Simulation and Analysis Web App
+![AI Biomodels Agent](ai_biomodels_agents.png)
 
-This Streamlit-based web application allows users to run and analyze biological simulations, particularly focused on glycolysis models. The app provides an interactive interface to select models, input simulation parameters, generate results, and visualize the output. It also integrates a language model for querying and explaining the simulation outcomes.
+This Streamlit-based web [application](How_to_use_app.pdf) allows users to run and analyze biological simulations, particularly focused on glycolysis models. The app provides an interactive interface to select models, input simulation parameters, generate results, and visualize the output. It also integrates a language model for querying and explaining the simulation outcomes.
 
 ## Flow Diagram
 
