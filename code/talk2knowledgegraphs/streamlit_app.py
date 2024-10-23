@@ -1,11 +1,16 @@
 import streamlit as st
 import pandas as pd
 import ollama
-from ollama_utils import ollama_stream, ollama_response
-from query_utils import from_collection_datasets_to_markdown, extract_dictionary_from_response
-from gene_expression_datasets_rag import load_rag_system, search_by_question
-from AD_QSP_tools import test_drug_efficacy, get_easi_severity, question_examples
-from cell2Sentence import question_to_cell_type
+
+import sys
+sys.path.append('/root/capsule/code/demo')
+from ollama_utils import ollama_stream
+from gene_expression_datasets_rag import load_rag_system
+
+# Dependencies
+# pip install stark_qa
+# pip install gravis
+
 import networkx as nx
 import matplotlib.pyplot as plt
 from stark_qa.tools.graph import k_hop_subgraph

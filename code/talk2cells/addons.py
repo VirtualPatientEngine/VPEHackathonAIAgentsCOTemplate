@@ -16,7 +16,7 @@ import scanpy as sc
 import cell2sentence as cs
 from cell2sentence.tasks import predict_cell_types_of_data
 
-DATA_PATH = "/root/capsule/scratch/data/processed_data.h5ad"
+DATA_PATH = "/root/capsule/data/sample/dominguez_conde_immune_tissue_two_donors.h5ad"
 
 adata = anndata.read_h5ad(DATA_PATH)
 

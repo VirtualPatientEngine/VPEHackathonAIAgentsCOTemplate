@@ -21,7 +21,7 @@ def get_model_id(text = "Hi,  Make  simulation of ID with 64 ."):
     "{text}"
     For example,
     Questions is : Please use Model ID 64 and generate simulation.
-    Annswer should be : {{"id" : 64}}              
+    Answer should be : {{"id" : 64}}              
     """)
 
 
@@ -87,7 +87,7 @@ def get_duration_time(text = "Run for 100 minutes."):
     "{text}"
     For example,
     Questions is : Run the simulaiton for 100 minutes.
-    Annswer should be : {{"duration" : 100}}              
+    Answer should be : {{"duration" : 100}}              
     """)
 
 
@@ -117,7 +117,7 @@ def get_ids(text = "Run the model with ID 64 for 100 minutes. Please make sure t
     "{text}"
     For example,
     Questions is : Run the model with ID 64 for 100 minutes. Please make sure the initial concentration of Sic is 0.005.
-    Annswer should be : {{"id" : 64, "duration" : 100, "species": "Sic", "concentration": 0.005}}
+    Answer should be : {{"id" : 64, "duration" : 100, "species": "Sic", "concentration": 0.005}}
     """)
 
 

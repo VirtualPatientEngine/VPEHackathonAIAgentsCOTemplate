@@ -1,3 +1,10 @@
+"""
+Instructions:
+1. Obtain a processed example dataset e.g., using https://github.com/vandijklab/cell2sentence/blob/master/tutorials/c2s_tutorial_0_data_preparation.ipynb
+2. Update the path to the dataset i.e., file_path = "/root/capsule/data/sample/dominguez_conde_immune_tissue_two_donors.h5ad"
+3. Run
+"""
+
 import streamlit as st
 import scanpy as sc
 import langchain
@@ -11,6 +18,14 @@ import matplotlib.pyplot as plt
 import scanpy as sc
 import numpy as np
 import pandas as pd
+
+import sys
+sys.path.append('/root/capsule/code/demo')
+from ollama_utils import ollama_stream
+from gene_expression_datasets_rag import load_rag_system
+
+st.set_page_config(page_title="LLM-RAG-for-biology-examples", page_icon="🌟", layout="wide")
+load_rag_system()
 
 def plotmap(adata, color="cell_type", size=8, title="Human UMAP"):
 
