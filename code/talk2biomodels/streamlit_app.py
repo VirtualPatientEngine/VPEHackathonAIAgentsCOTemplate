@@ -29,6 +29,8 @@ import streamlit as st
 if "show_text" not in st.session_state:
     st.session_state.show_text = False
 
+import os
+os.environ["OPENAI_API_KEY"] = "XXX"
 
 import pandas as pd
 import os
@@ -93,9 +95,6 @@ except:
     image = None
     pass
 
-import os
-os.environ["OPENAI_API_KEY"] = "XXX"
-
 from langchain_experimental.agents import create_csv_agent
 from langchain_openai import OpenAI
 
@@ -137,6 +136,6 @@ with col2:
             st.header("List of Simulated Speices : ")
             st.table(input_species_df)
     else:
-        st.header("Enter your detials and Genereate a simulation")
+        st.header("Enter your details and generate a simulation")
 
         
