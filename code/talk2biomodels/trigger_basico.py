@@ -37,17 +37,16 @@ def generate_simulation(model_id=297, species_name=None, species_concentraion=No
     
     model_obj = load_biomodel(model_id)  # Load the BIOMD0000000064 (Teusink2000_Glycolysis) model
 
-    print(basico.get_model_name(model=model_obj))
+    #print(basico.get_model_name(model=model_obj))
     with open(f"{result_path}/name.txt", "w") as file:
         file.write(get_model_info(model_id)["name"])
 
 
-    species = get_species() # Get the species and their initial concentrations
-    print(get_species(name=species_name,exact=True, model=model_obj))
-    print(species_name, species_concentraion)
+    #species = get_species() # Get the species and their initial concentrations
+    #print(species.head())
+    #print(species_name, species_concentraion)
     if species_name != None and species_concentraion != None:
         set_species(name=species_name, initial_concentration=species_concentraion, model=model_obj)
-        print(get_species(name=species_name,exact=True, model=model_obj))
 
 
     with open(f"{result_path}/description.html", "w", encoding="utf-8") as file:
