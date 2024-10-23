@@ -22,6 +22,9 @@ The following libraries and functionalities are used:
 Users can select a model ID, provide species information and timeline, run simulations, 
 and then visualize and explore the results interactively. The results are saved to CSV 
 files, and the application provides a summary of the simulation along with a graphical plot.
+
+Example prompt: Run the model with ID 64 for 100 minutes. Please make sure the initial concentration of "Glucose in Cytosol" is 10.0.
+Example prompt: What species has the largest concentration at time=0?
 """
 
 import streamlit as st
@@ -77,7 +80,7 @@ with col1:
 
 try:
     from pathlib import Path
-    result_path = Path(__file__).resolve().parent.parent / "results"
+    result_path = Path(__file__).resolve().parent.parent.parent / "results"
     df = pd.read_csv(f'{result_path}/glycolysis_simulation.csv')
     
     input_species_df = pd.read_csv(f'{result_path}/input_species.csv')[["sbml_id", "initial_concentration"]]
@@ -104,7 +107,7 @@ with col2:
     # Display the image
     if image:
         question = st.text_input("Ask question about generated simulation results:")
-        csv_path = str(Path(__file__).resolve().parent.parent / "results/glycolysis_simulation.csv")
+        csv_path = str(Path(__file__).resolve().parent.parent.parent / "results/glycolysis_simulation.csv")
         if st.button("ask question", type="primary"):
             st.cache_resource.clear()
             agent = create_csv_agent(OpenAI(temperature=0), allow_dangerous_code=True, path=csv_path)

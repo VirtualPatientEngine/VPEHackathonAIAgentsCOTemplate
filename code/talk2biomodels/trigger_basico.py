@@ -3,7 +3,7 @@ import basico
 from basico import load_biomodel, get_species, set_species, get_parameters, run_time_course, remove_amount_expressions
 from basico.biomodels import get_model_info
 import matplotlib.pyplot as plt
-result_path = Path(__file__).resolve().parent.parent / "results"
+result_path = Path(__file__).resolve().parent.parent.parent / "results"
 
 def generate_simulation(model_id=297, species_name=None, species_concentraion=None, duration=5):
 
@@ -46,7 +46,6 @@ def generate_simulation(model_id=297, species_name=None, species_concentraion=No
     print(get_species(name=species_name,exact=True, model=model_obj))
     print(species_name, species_concentraion)
     if species_name != None and species_concentraion != None:
-        print("Hello")
         set_species(name=species_name, initial_concentration=species_concentraion, model=model_obj)
         print(get_species(name=species_name,exact=True, model=model_obj))
 
