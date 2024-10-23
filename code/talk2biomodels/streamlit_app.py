@@ -139,6 +139,6 @@ with col2:
             st.header("List of Simulated Speices : ")
             st.table(input_species_df)
     else:
-        st.header("Enter your details and generate a simulation")
+        st.header("Specify the model and parameters you want to simulate")
 
         
