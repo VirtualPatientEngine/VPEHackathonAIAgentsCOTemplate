@@ -24,7 +24,7 @@ and then visualize and explore the results interactively. The results are saved 
 files, and the application provides a summary of the simulation along with a graphical plot.
 
 Example prompt: Run the model with ID 64 for 100 minutes. Please make sure the initial concentration of "Glucose in Cytosol" is 10.0.
-Example prompt: What species has the largest concentration at time=0?
+Example prompt: What species has the highest concentration?
 """
 
 import streamlit as st
@@ -43,9 +43,9 @@ from trigger_basico import generate_simulation
 from extract_id import get_model_id, get_duration_time, get_species_info, get_ids, remove_all_files
 st.set_page_config(page_title="LLM-RAG-for-biology-team-5", page_icon="🌟", layout="wide")
 
-st.title("Ask me bio-medical question")
+st.title("Ask me about a biomedical computational model")
 st.write(
-        "Control your Simulations: The LLM will see your results and explain them in a professional way."
+        "Talk to BioModels: The LLM will run a computational model based on your input."
     )
 # selected_model = st.selectbox("Select a model:", models, index=models.index(default_model))
 
@@ -55,7 +55,7 @@ col1, col2 = st.columns([1, 2])
 with col1:
 
     # model_inp_text = st.selectbox("Model ID ?",(64, 297, 535))
-    user_inp_text = st.text_area("which Model ID you want to simulate :", height=100)
+    user_inp_text = st.text_area("Specify the BioModels ID and parameters you want to simulate:", height=100)
     ids_json = get_ids(user_inp_text)
     model_inp_text = ids_json["id"]
     try:
@@ -106,7 +106,7 @@ from langchain_openai import OpenAI
 with col2:
     # Display the image
     if image:
-        question = st.text_input("Ask question about generated simulation results:")
+        question = st.text_input("Ask a question about the generated simulation results:")
         csv_path = str(Path(__file__).resolve().parent.parent.parent / "results/glycolysis_simulation.csv")
         if st.button("ask question", type="primary"):
             st.cache_resource.clear()
@@ -138,7 +138,5 @@ with col2:
 
             st.header("List of Simulated Speices : ")
             st.table(input_species_df)
-    else:
-        st.header("Specify the model and parameters you want to simulate")
 
         
