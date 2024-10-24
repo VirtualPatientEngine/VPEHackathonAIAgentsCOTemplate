@@ -1,11 +1,18 @@
 # VPE Hackathon: AI Agents for Life Sciences
 
-## Preparing the environment
-1. Ready to use Code Ocean Capsule
-2. Run the Docker image locally or on the cloud
-3. Python virtual environment
+## Recommended environment setup options
+*Please review the `/environment/Dockerfile` for required installations and python packages*<br>
+1. From a code ocean capsule
+2. From a Docker image locally or on the cloud
+3. From a python virtual environment
 
 ## Running the projects
+### Assumed folder structure
+> code/... # where the code lives
+> data/... # where data assets live
+> results/... # where results are written to
+
+### From the command line
 Run the demo
 `streamlit run /code/demo/streamlit_app.py`
 Run the Talk2Biomodels
@@ -17,6 +24,7 @@ Run the Talk2KnowledgeGraphs
 
 ## Projects and task categories
 ### Demo
+
 [README](./code/demo/README.md)
 ### Talk2Biomodels
 [README](./code/talk2biomodels/README.md)
