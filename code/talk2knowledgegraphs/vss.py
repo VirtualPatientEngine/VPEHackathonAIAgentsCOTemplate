@@ -1,7 +1,7 @@
 import os.path as osp
 import torch
 from typing import Any, Union, List, Dict
-from stark_model.py import ModelForSTaRKQA
+from stark_model import ModelForSTaRKQA
 from tqdm import tqdm
 from stark_qa.evaluator import Evaluator
 

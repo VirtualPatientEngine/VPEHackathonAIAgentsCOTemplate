@@ -32,9 +32,6 @@ import streamlit as st
 if "show_text" not in st.session_state:
     st.session_state.show_text = False
 
-import os
-os.environ["OPENAI_API_KEY"] = "XXX"
-
 import pandas as pd
 import os
 import glob
