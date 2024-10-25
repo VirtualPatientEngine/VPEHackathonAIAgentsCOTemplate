@@ -5,9 +5,7 @@ from langchain.chains import LLMChain
 import os
 import glob
 
-os.environ["OPENAI_API_KEY"] = "XXX"
-
-def get_model_id(text = "Hi,  Make  simulation of ID with 64 ."):
+def get_model_id(text = "Hi, Make simulation of ID with 64 ."):
     """
     Extract the model ID number from the given text and return it as a JSON object.
     """
